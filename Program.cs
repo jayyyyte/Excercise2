@@ -95,7 +95,7 @@ namespace exercise2
 
         public void DisplayInfo()
         {
-            Console.WriteLine($"| {Name,-30} | {HomeTown,-35} | {IdNumber,-18} | {Score.Maths,-8} | {Score.Physics,-8} | {Score.Chemistry,-10} | {TotalScore(),-11} |");
+            Console.WriteLine($"| {Name,-30} | {HomeTown,-35} | {IdNumber,-18} | {Score.Maths,-8} | {Score.Physics,-8} | {Score.Chemistry,-10} | {TotalScore().ToString("0.00"),-11} |");
         }
     }
 
@@ -108,6 +108,7 @@ namespace exercise2
             Console.Write("Enter number of candidate: ");
             int n = int.Parse(Console.ReadLine());
 
+            // initialize list of candidates
             for (int i=0; i<n; i++)
             {
                 THISINH ts = new THISINH();
@@ -116,11 +117,31 @@ namespace exercise2
                 Console.WriteLine();
             }
 
+            // display list of candidates
             TitleDisplay();
             foreach (THISINH ts in candidateList)
             {
                 ts.DisplayInfo();
             }
+            Console.WriteLine();
+
+            // find and print out candidates who have total score > 15
+            Console.WriteLine("List of candidate with total score > 15: ");         
+            TitleDisplay();
+            List<THISINH> candidateList2 = new List<THISINH>();
+            foreach(THISINH ts2 in candidateList)
+            {
+                if(ts2.TotalScore() > 15)
+                {
+                    candidateList2.Add(ts2);
+                }
+            }
+
+            foreach (THISINH ts2 in candidateList2)
+            {
+                ts2.DisplayInfo();
+            }
+            
             
             Console.ReadKey();
         }
