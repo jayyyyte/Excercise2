@@ -95,7 +95,7 @@ namespace exercise2
 
         public void DisplayInfo()
         {
-            Console.WriteLine($"| {Name,-30} | {HomeTown,-35} | {IdNumber,-18} | {Score.Maths,-8} | {Score.Physics,-8} | {Score.Chemistry,-10} | {TotalScore().ToString("0.00"),-11} |");
+            Console.WriteLine($"| {Name,-30} | {HomeTown,-35} | {IdNumber,-15} | {Score.Maths,-8} | {Score.Physics,-8} | {Score.Chemistry,-10} | {TotalScore().ToString("0.00"),-11} |");
         }
     }
 
@@ -118,6 +118,7 @@ namespace exercise2
             }
 
             // display list of candidates
+            Console.WriteLine("List of candidates: ");
             TitleDisplay();
             foreach (THISINH ts in candidateList)
             {
@@ -141,16 +142,26 @@ namespace exercise2
             {
                 ts2.DisplayInfo();
             }
-            
+            Console.WriteLine();
+
+            // sort the list in descending order of TotalScore and print the list
+            candidateList = candidateList.OrderByDescending(ts => ts.TotalScore()).ToList();
+
+            Console.WriteLine("Rank of candidate from on down: ");
+            TitleDisplay();
+            foreach(THISINH ts3 in candidateList)
+            {
+                ts3.DisplayInfo();
+            }
             
             Console.ReadKey();
         }
 
         static void TitleDisplay()
         {
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine($"| {"Full Name",-30} | {"Hometown",-35} | {"ID Number",-18} | {"Maths",-8} | {"Physics",-8} | {"Chemistry",-10} | {"Total score",-8} |");
-            Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine($"| {"Full Name",-30} | {"Hometown",-35} | {"ID Number",-15} | {"Maths",-8} | {"Physics",-8} | {"Chemistry",-10} | {"Total score",-8} |");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------------------------------------");
         }
     }
 }
