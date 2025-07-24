@@ -103,14 +103,25 @@ namespace exercise2
     {
         static void Main(string[] args)
         {
-            THISINH ts = new THISINH();
-            ts.EnterInfo();
-            Console.WriteLine();
+            List<THISINH> candidateList = new List<THISINH>();
+
+            Console.Write("Enter number of candidate: ");
+            int n = int.Parse(Console.ReadLine());
+
+            for (int i=0; i<n; i++)
+            {
+                THISINH ts = new THISINH();
+                ts.EnterInfo();
+                candidateList.Add(ts);
+                Console.WriteLine();
+            }
 
             TitleDisplay();
-            ts.DisplayInfo();
+            foreach (THISINH ts in candidateList)
+            {
+                ts.DisplayInfo();
+            }
             
-
             Console.ReadKey();
         }
 
