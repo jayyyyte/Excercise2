@@ -101,58 +101,150 @@ namespace exercise2
 
     class Program
     {
-        static void Main(string[] args)
+        static List<THISINH> candidateList = new List<THISINH>();
+
+        static void Menu()
         {
-            List<THISINH> candidateList = new List<THISINH>();
+            Console.WriteLine("Menu: ");
+            Console.WriteLine("1. Import data and print out the screen.");
+            Console.WriteLine("2. Build list of candidates.");
+            Console.WriteLine("3. Find candidates with total score > 15.");
+            Console.WriteLine("4. Sort the list by descending order.");
+            Console.WriteLine("5. Exit.");
+        }
 
-            Console.Write("Enter number of candidate: ");
-            int n = int.Parse(Console.ReadLine());
-
-            // initialize list of candidates
-            for (int i=0; i<n; i++)
+        static void PrintList()
+        {
+            if (candidateList.Count > 0)
             {
-                THISINH ts = new THISINH();
-                ts.EnterInfo();
-                candidateList.Add(ts);
-                Console.WriteLine();
-            }
-
-            // display list of candidates
-            Console.WriteLine("List of candidates: ");
-            TitleDisplay();
-            foreach (THISINH ts in candidateList)
-            {
-                ts.DisplayInfo();
-            }
-            Console.WriteLine();
-
-            // find and print out candidates who have total score > 15
-            Console.WriteLine("List of candidate with total score > 15: ");         
-            TitleDisplay();
-            List<THISINH> candidateList2 = new List<THISINH>();
-            foreach(THISINH ts2 in candidateList)
-            {
-                if(ts2.TotalScore() > 15)
+                TitleDisplay();
+                foreach (THISINH candidate in candidateList)
                 {
-                    candidateList2.Add(ts2);
+                    candidate.DisplayInfo();
                 }
             }
-
-            foreach (THISINH ts2 in candidateList2)
+            else
             {
-                ts2.DisplayInfo();
+                Console.WriteLine("Empty list");
             }
-            Console.WriteLine();
+        }
 
-            // sort the list in descending order of TotalScore and print the list
+        static void TotalScoreBiggerThan15()
+        {
+            Console.WriteLine("List of candidate with total score > 15: ");
+            TitleDisplay();
+            foreach(THISINH candidate in candidateList.Where(candidate => candidate.TotalScore() > 15))
+            {
+                candidate.DisplayInfo();
+            }
+        }
+
+        static void SortByDescendingOrder()
+        {
             candidateList = candidateList.OrderByDescending(ts => ts.TotalScore()).ToList();
 
-            Console.WriteLine("Rank of candidate from on down: ");
+            Console.WriteLine("Rank candidates by descending order: ");
             TitleDisplay();
-            foreach(THISINH ts3 in candidateList)
+            PrintList();
+        }
+
+        static void Main(string[] args)
+        {
+            while (true)
             {
-                ts3.DisplayInfo();
+                Console.Clear();
+                Menu();
+                Console.Write("Choose 1 function 1-5: ");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        THISINH ts = new THISINH();
+                        ts.EnterInfo();
+                        candidateList.Add(ts);
+
+                        TitleDisplay();
+                        ts.DisplayInfo();
+                        Console.WriteLine();
+                        break;
+                    
+                    case "2":
+                        Console.WriteLine("List of candidates: ");
+                       PrintList();
+                        break;
+
+                    case "3":
+                        TotalScoreBiggerThan15();
+                        break;
+
+                    case "4":
+                        SortByDescendingOrder();
+                        break;
+
+                    case "5":
+                        Console.Write("Do you want to exit? (Y/N)  ");
+                        string ans = Console.ReadLine();
+                        if (ans.ToLower().Equals("y"))
+                        {
+                            return;
+                        }
+                        break;
+                }
+
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
+            //List<THISINH> candidateList = new List<THISINH>();
+
+            //Console.Write("Enter number of candidate: ");
+            //int n = int.Parse(Console.ReadLine());
+
+            //// initialize list of candidates
+            //for (int i=0; i<n; i++)
+            //{
+            //    THISINH ts = new THISINH();
+            //    ts.EnterInfo();
+            //    candidateList.Add(ts);
+            //    Console.WriteLine();
+            //} 
+
+            //// display list of candidates
+            //Console.WriteLine("List of candidates: ");
+            //TitleDisplay();
+            //foreach (THISINH ts in candidateList)
+            //{
+            //    ts.DisplayInfo();
+            //}
+            //Console.WriteLine();
+
+            //// find and print out candidates who have total score > 15
+            //Console.WriteLine("List of candidate with total score > 15: ");         
+            //TitleDisplay();
+            //List<THISINH> candidateList2 = new List<THISINH>();
+            //foreach(THISINH ts2 in candidateList)
+            //{
+            //    if(ts2.TotalScore() > 15)
+            //    {
+            //        candidateList2.Add(ts2);
+            //    }
+            //}
+
+            //foreach (THISINH ts2 in candidateList2)
+            //{
+            //    ts2.DisplayInfo();
+            //}
+            //Console.WriteLine();
+
+            //// sort the list in descending order of TotalScore and print the list
+            //candidateList = candidateList.OrderByDescending(ts => ts.TotalScore()).ToList();
+
+            //Console.WriteLine("Rank of candidate from on down: ");
+            //TitleDisplay();
+            //foreach(THISINH ts3 in candidateList)
+            //{
+            //    ts3.DisplayInfo();
+            //}
             
             Console.ReadKey();
         }
