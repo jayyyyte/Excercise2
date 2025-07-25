@@ -54,43 +54,49 @@ namespace exercise2
 
         public void EnterInfo()
         {
-            Console.WriteLine("Enter candidate's information:");
+            try
+            {
+                Console.WriteLine("Enter candidate's information:");
 
-            Console.Write("Last name: ");
-            Name.LastName = Console.ReadLine() ?? "";       // operator ?? to assign default value as empty string ("") if input is null
+                Console.Write("Last name: ");
+                Name.LastName = Console.ReadLine() ?? "";       // operator ?? to assign default value as empty string ("") if input is null
 
-            Console.Write("Middle name: ");
-            Name.MiddleName = Console.ReadLine() ?? "";
+                Console.Write("Middle name: ");
+                Name.MiddleName = Console.ReadLine() ?? "";
 
-            Console.Write("First name: ");
-            Name.FirstName = Console.ReadLine() ?? "";
+                Console.Write("First name: ");
+                Name.FirstName = Console.ReadLine() ?? "";
 
-            Console.Write("Commune: ");
-            HomeTown.Commune = Console.ReadLine() ?? "";
+                Console.Write("Commune: ");
+                HomeTown.Commune = Console.ReadLine() ?? "";
 
-            Console.Write("District: ");
-            HomeTown.District = Console.ReadLine() ?? "";
+                Console.Write("District: ");
+                HomeTown.District = Console.ReadLine() ?? "";
 
-            Console.Write("Province: ");
-            HomeTown.Province = Console.ReadLine() ?? "";
+                Console.Write("Province: ");
+                HomeTown.Province = Console.ReadLine() ?? "";
 
-            Console.Write("School: ");
-            School = Console.ReadLine() ?? "";
+                Console.Write("School: ");
+                School = Console.ReadLine() ?? "";
 
-            Console.Write("Age: ");
-            Age = int.Parse(Console.ReadLine() ?? "");
+                Console.Write("Age: ");
+                Age = int.Parse(Console.ReadLine() ?? "");
 
-            Console.Write("ID number: ");
-            IdNumber = Console.ReadLine() ?? "";
+                Console.Write("ID number: ");
+                IdNumber = Console.ReadLine() ?? "";
 
-            Console.Write("Maths score: ");
-            Score.Maths = double.Parse(Console.ReadLine() ?? "");
+                Console.Write("Maths score: ");
+                Score.Maths = double.Parse(Console.ReadLine() ?? "");
 
-            Console.Write("Physics score: ");
-            Score.Physics = double.Parse(Console.ReadLine() ?? "");
+                Console.Write("Physics score: ");
+                Score.Physics = double.Parse(Console.ReadLine() ?? "");
 
-            Console.Write("Chemistry score: ");
-            Score.Chemistry = double.Parse(Console.ReadLine() ?? "");
+                Console.Write("Chemistry score: ");
+                Score.Chemistry = double.Parse(Console.ReadLine() ?? "");
+            } catch (Exception e)
+            {
+                Console.WriteLine("Error : " + e.Message);
+            }
         }
 
         public void DisplayInfo()
@@ -157,44 +163,56 @@ namespace exercise2
                 Console.Write("Choose 1 function 1-5: ");
                 string choice = Console.ReadLine();
 
-                switch (choice)
+                try
                 {
-                    case "1":
-                        THISINH ts = new THISINH();
-                        ts.EnterInfo();
-                        candidateList.Add(ts);
+                    switch (choice)
+                    {
+                        case "1":
+                            THISINH ts = new THISINH();
+                            ts.EnterInfo();
+                            candidateList.Add(ts);
 
-                        TitleDisplay();
-                        ts.DisplayInfo();
-                        Console.WriteLine();
-                        break;
-                    
-                    case "2":
-                        Console.WriteLine("List of candidates: ");
-                       PrintList();
-                        break;
+                            TitleDisplay();
+                            ts.DisplayInfo();
+                            Console.WriteLine();
+                            break;
 
-                    case "3":
-                        TotalScoreBiggerThan15();
-                        break;
+                        case "2":
+                            Console.WriteLine("List of candidates: ");
+                            PrintList();
+                            break;
 
-                    case "4":
-                        SortByDescendingOrder();
-                        break;
+                        case "3":
+                            TotalScoreBiggerThan15();
+                            break;
 
-                    case "5":
-                        Console.Write("Do you want to exit? (Y/N)  ");
-                        string ans = Console.ReadLine();
-                        if (ans.ToLower().Equals("y"))
-                        {
-                            return;
-                        }
-                        break;
+                        case "4":
+                            SortByDescendingOrder();
+                            break;
+
+                        case "5":
+                            Console.Write("Do you want to exit? (Y/N)  ");
+                            string ans = Console.ReadLine();
+                            if (ans.ToLower().Equals("y"))
+                            {
+                                return;
+                            }
+                            break;
+
+                        default:
+                            Console.WriteLine("Invalid option");
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
                 }
 
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
+
             //List<THISINH> candidateList = new List<THISINH>();
 
             //Console.Write("Enter number of candidate: ");
